@@ -40,7 +40,7 @@ body {
     min-height: 634px;
     width: 100vw;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: column;
     display: flex;
     position: relative;
@@ -62,12 +62,10 @@ body {
 .title-div-2 {
     height: 70px;
     width: 287.5px;
-    border-radius: 10px;
     align-items: center;
     justify-content: space-around;
     display: flex;
     position: relative;
-    box-shadow: inset 0 0 0 2.5px brown;
 }
 
 a {
@@ -320,15 +318,14 @@ button:active {
 }
 
 .explanation-area {
-    height: 1268px;
+    height: 1523px;
     width: 100vw;
     align-items: center;
-    justify-content: space-between;
     flex-direction: column;
     display: flex;
     position: relative;
     background-image:
-        linear-gradient(0deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.75) 100%),
         linear-gradient(0deg, rgba(128, 0, 0, 1) 0%, rgba(128, 0, 0, 1) 100%);
 }
 
@@ -339,47 +336,149 @@ button:active {
     justify-content: space-around;
     display: flex;
     position: relative;
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.375) 0%, rgba(255, 255, 255, 0.375) 100%),
+        linear-gradient(0deg, rgba(128, 0, 0, 1) 0%, rgba(128, 0, 0, 1) 100%);
 }
 
 .explanation-div-2 {
     height: 70px;
     width: 287.5px;
-    border-radius: 10px;
     align-items: center;
     justify-content: space-around;
     display: flex;
     position: relative;
-    box-shadow: inset 0 0 0 2.5px white;
 }
 
 h2 {
     font-size: 35px;
-    color: white;
+    color: #dfbfbf;
 }
 
 .explanation {
-    height: 400px;
+    height: 1183px;
     width: 345px;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: space-around;
+    flex-direction: column;
     display: flex;
     position: relative;
-    background-color: white;
 }
 
-.links-area {
-    height: 85px;
+.explanation-1-div-1 {
+    height: 549px;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+
+.explanation-2-div-1 {
+    height: 634px;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+.explanation-1-div-2,
+.explanation-2-div-2 {
+    height: 84px;
     width: 100%;
     align-items: center;
     justify-content: space-around;
     display: flex;
     position: relative;
+    border-bottom: solid #b06060 1px;
 }
 
-.links {
-    height: 70px;
-    width: 287.5px;
+.explanation-title {
+    text-align: center;
+    color: #b06060;
+}
+
+.explanation-1-div-3 {
+    height: 464px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+.explanation-2-div-3 {
+    height: 549px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+.explanation-1,
+.explanation-2 {
+    align-items: center;
+    justify-content: space-around;
+
+    font-size: 14.25px;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.wikipedia-link {
+    color: #b06060;
+}
+
+.contact-area {
+    height: 255px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.375) 0%, rgba(255, 255, 255, 0.375) 100%),
+        linear-gradient(0deg, rgba(128, 0, 0, 1) 0%, rgba(128, 0, 0, 1) 100%);
+}
+
+.contact-text {
+    height: 170px;
+    width: 345px;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+
+    text-align: justify;
+    color: #dfbfbf;
+}
+
+.contact-h3 {
+    height: 41.5px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    border-bottom: solid #dfbfbf 1px;
+}
+
+.contact-text-area {
+    height: 126.5px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    border-bottom: solid #dfbfbf 1px;
+}
+
+.links-area {
+    height: 85px;
+    width: 172.5px;
     align-items: center;
     justify-content: space-around;
     display: flex;
@@ -388,8 +487,8 @@ h2 {
 
 .github-div,
 .linkedin-div {
-    height: 70px;
-    width: 70px;
+    height: 55px;
+    width: 55px;
     align-items: center;
     justify-content: space-around;
     display: flex;

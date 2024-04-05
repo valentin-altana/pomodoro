@@ -1,0 +1,415 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Comfortaa";
+}
+
+body {
+    height: 200vh;
+    min-height: 1268px;
+    width: 100vw;
+    flex-direction: column;
+    display: flex;
+    position: absolute;
+    background-color: black;
+    /* animation: start-scroll 3.5s ease-in-out; */
+}
+
+@keyframes start-scroll {
+    0% {
+        transform: translateY(0px);
+    }
+
+    30% {
+        transform: translateY(0px);
+    }
+
+    70% {
+        transform: translateY(-85px);
+    }
+
+    80% {
+        transform: translateY(-85px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.timer-area {
+    height: 50%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    background-image:
+        radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%),
+        linear-gradient(0deg, rgba(128, 0, 0, 1) 0%, rgba(128, 0, 0, 1) 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+}
+
+.title-div-1 {
+    height: 85px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.title-div-2 {
+    height: 70px;
+    width: 287.5px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    box-shadow: inset 0 0 0 2.5px brown;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 35px;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(0deg, rgba(255, 135, 75, 1), rgba(255, 65, 70, 1));
+}
+
+.timer-options {
+    height: 85px;
+    width: 345px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+    display: flex;
+    position: relative;
+    background-color: brown;
+}
+
+.div-buttons {
+    height: 85px;
+    width: 86.25px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.program-buttons-side-1 {
+    height: 45px;
+    width: 86.25px;
+    align-items: end;
+    display: flex;
+    position: absolute;
+}
+
+.program-buttons-side-2 {
+    height: 30px;
+    width: 86.25px;
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.75) 100%),
+        linear-gradient(0deg, rgba(165, 42, 42, 1) 0%, rgba(165, 42, 42, 1) 100%);
+    border: solid black 1px;
+}
+
+.program-buttons {
+    height: 35px;
+    width: 86.25px;
+
+    font-size: 15px;
+}
+
+button {
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.75) 100%),
+        linear-gradient(0deg, rgba(165, 42, 42, 1) 0%, rgba(165, 42, 42, 1) 100%);
+    border: solid black 1px;
+    box-shadow: 0 5px 5px 2.5px rgba(0, 0, 0, 0.5);
+
+    color: maroon;
+}
+
+button:active {
+    top: 5px;
+    box-shadow: inset 0 2px 2px 0 black;
+}
+
+.timer-div-1 {
+    height: 345px;
+    width: 345px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-color: brown;
+}
+
+.timer-div-2 {
+    height: 95%;
+    width: 95%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+.timer-background {
+    height: 75%;
+    width: 100%;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-image:
+        radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%),
+        linear-gradient(0deg, rgba(128, 0, 0, 1) 0%, rgba(128, 0, 0, 1) 100%);
+    background-size: 2.5px 2.5px, 100% 100%, 100% 100%;
+}
+
+.timer-window {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 50px 0 rgba(0, 0, 0, 0.5);
+}
+
+.timer {
+    font-size: 100px;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-image:
+        radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%),
+        linear-gradient(0deg, rgba(255, 135, 75, 1), rgba(255, 65, 70, 1));
+    background-size: 2.5px 2.5px, 100% 100%, 100% 100%;
+}
+
+.countdown-background {
+    height: 15%;
+    width: 50%;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-image:
+        radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%),
+        linear-gradient(0deg, rgba(128, 0, 0, 1) 0%, rgba(128, 0, 0, 1) 100%);
+    background-size: 2.5px 2.5px, 100% 100%, 100% 100%;
+}
+
+.countdown-window {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
+}
+
+.countdown {
+    font-size: 25px;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-image:
+        radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%),
+        linear-gradient(0deg, rgba(255, 135, 75, 1), rgba(255, 65, 70, 1));
+    background-size: 2.5px 2.5px, 100% 100%, 100% 100%;
+}
+
+.progress-bar-background {
+    height: 5%;
+    width: 100%;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-color: maroon;
+}
+
+.progress-container-1 {
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.progress-container-2 {
+    height: 65%;
+    width: 98.25%;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: left;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 65%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-image: linear-gradient(180deg, rgba(255, 135, 75, 1) 0%, rgba(255, 65, 70, 1) 100%);
+}
+
+.start-div {
+    height: 85px;
+    width: 255px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.start-button-side-1 {
+    height: 60px;
+    width: 172.5px;
+    align-items: end;
+    display: flex;
+    position: absolute;
+}
+
+.start-button-side-2 {
+    height: 40px;
+    width: 172.5px;
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.75) 100%),
+        linear-gradient(0deg, rgba(165, 42, 42, 1) 0%, rgba(165, 42, 42, 1) 100%);
+    border: solid black 1px;
+}
+
+.start-button {
+    height: 50px;
+    width: 172.5px;
+
+    font-size: 25px;
+}
+
+.explanation-area {
+    height: 50%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%),
+        linear-gradient(0deg, rgba(128, 0, 0, 1) 0%, rgba(128, 0, 0, 1) 100%);
+}
+
+.explanation-div-1 {
+    height: 85px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.explanation-div-2 {
+    height: 70px;
+    width: 287.5px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    box-shadow: inset 0 0 0 2.5px white;
+}
+
+h2 {
+    font-size: 35px;
+    color: white;
+}
+
+.explanation {
+    height: 400px;
+    width: 345px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+    background-color: white;
+}
+
+.links-area {
+    height: 85px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.links {
+    height: 70px;
+    width: 287.5px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.github-div,
+.linkedin-div {
+    height: 70px;
+    width: 70px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.github-a,
+.linkedin-a {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}

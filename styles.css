@@ -6,9 +6,6 @@
 }
 
 body {
-    height: 200vh;
-    min-height: 1268px;
-    width: 100vw;
     flex-direction: column;
     display: flex;
     position: absolute;
@@ -39,8 +36,9 @@ body {
 }
 
 .timer-area {
-    height: 50%;
-    width: 100%;
+    height: 100vh;
+    min-height: 634px;
+    width: 100vw;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
@@ -322,8 +320,8 @@ button:active {
 }
 
 .explanation-area {
-    height: 50%;
-    width: 100%;
+    height: 1268px;
+    width: 100vw;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;

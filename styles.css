@@ -474,6 +474,9 @@ h2 {
     display: flex;
     position: relative;
     border-bottom: solid #dfbfbf 1px;
+
+    font-size: 13.25px;
+    line-height: 1.5;
 }
 
 .links-area {

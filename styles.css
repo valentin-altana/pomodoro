@@ -10,29 +10,6 @@ body {
     display: flex;
     position: absolute;
     background-color: black;
-    /* animation: start-scroll 3.5s ease-in-out; */
-}
-
-@keyframes start-scroll {
-    0% {
-        transform: translateY(0px);
-    }
-
-    30% {
-        transform: translateY(0px);
-    }
-
-    70% {
-        transform: translateY(-85px);
-    }
-
-    80% {
-        transform: translateY(-85px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
 }
 
 .timer-area {

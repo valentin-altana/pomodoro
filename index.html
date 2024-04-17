@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallacefocus</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts/2-hour-program.js" defer></script>
     <!-- FONTS -->
     <!-- Comfortaa -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,25 +28,26 @@
                 <div class="program-buttons-side-1">
                     <div class="program-buttons-side-2"></div>
                 </div>
-                <button class="program-buttons">2 heures</button>
+                <button class="program-buttons" id="2-hour-program">2 heures</button>
             </div>
             <div class="div-buttons">
                 <div class="program-buttons-side-1">
                     <div class="program-buttons-side-2"></div>
                 </div>
-                <button class="program-buttons">4 heures</button>
+                <button class="program-buttons" id="4-hour-program">4 heures</button>
             </div>
             <div class="div-buttons">
                 <div class="program-buttons-side-1">
                     <div class="program-buttons-side-2"></div>
                 </div>
-                <button class="program-buttons">8 heures</button>
+                <button class="program-buttons" id="8-hour-program">8 heures</button>
             </div>
         </div>
         <div class="timer-div-1">
             <div class="timer-div-2">
                 <div class="timer-background">
                     <div class="timer-window">
+                        <p class="selected-program"></p>
                         <p class="timer"></p>
                     </div>
                 </div>
@@ -79,7 +81,7 @@
         <div class="explanation">
             <div class="explanation-1-div-1">
                 <div class="explanation-1-div-2">
-                    <h3 class="explanation-title">• Qu'est ce que la technique Pomodoro ?</h3>
+                    <h3 class="explanation-title">• Qu'est-ce que la technique Pomodoro ?</h3>
                 </div>
                 <div class="explanation-1-div-3">
                     <p class="explanation-1">
@@ -117,7 +119,7 @@
                         <br>
                         Tu pourras mettre le programme en pause à tout moment si tu le désires.<br>
                         <br>
-                        Si tu débutes, commence avec les programmes "2 heures" et "4 heures". Pour les habitués, le
+                        Si tu débutes, commence avec les programmes "2 heures" et "4 heures". Pour les habitué.e.s, le
                         programme de 8 heures est idéal pour une session de travail prolongée.
                     </p>
                 </div>

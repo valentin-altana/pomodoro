@@ -227,11 +227,12 @@ button:active {
     box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
 }
 
+.selected-duration,
 .countdown {
     align-items: center;
     justify-content: space-around;
     display: flex;
-    position: relative;
+    position: absolute;
 
     font-size: 25px;
     -webkit-text-fill-color: transparent;

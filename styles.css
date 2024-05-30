@@ -316,11 +316,25 @@ button:active {
     border: solid black 1px;
 }
 
-.start-button {
+.start-button,
+.break-button,
+.resume-button {
     height: 50px;
     width: 172.5px;
 
     font-size: 25px;
+}
+
+.start-button {
+    display: block;
+}
+
+.break-button {
+    display: none;
+}
+
+.resume-button {
+    display: none;
 }
 
 .explanation-area {

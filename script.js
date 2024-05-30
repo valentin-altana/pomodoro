@@ -2,6 +2,8 @@ const buttonTwoHourProgram = document.getElementById("2-hour-program")
 const buttonFourHourProgram = document.getElementById("4-hour-program")
 const buttonEightHourProgram = document.getElementById("8-hour-program")
 const startButton = document.querySelector(".start-button")
+const breakButton = document.querySelector(".break-button")
+const resumeButton = document.querySelector(".resume-button")
 
 const selectedProgramElement = document.querySelector(".selected-program")
 const timerElement = document.querySelector(".timer")
@@ -47,4 +49,118 @@ buttonFourHourProgram.addEventListener("click", () => {
 
 buttonEightHourProgram.addEventListener("click", () => {
     buttonAdjustment("huit heures", 8)
+})
+
+let isBreak = false
+let breakTime = 0
+let timeBeforeBreak = 0
+
+function timer(duration) {
+    return new Promise((resolve) => {
+        let startTime = Date.now()
+        const interval = setInterval(() => {
+            if (isBreak) {
+                return null
+            }
+            const elapsedTime = Date.now() - startTime - breakTime
+            const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
+            const minutes = Math.floor(remainingTime / 60)
+            const seconds = remainingTime % 60
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes
+            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds
+            document.title = `Wallacefocus • ${formattedMinutes}:${formattedSeconds}`
+            timerElement.innerText = `${formattedMinutes}:${formattedSeconds}`
+            if (remainingTime === 0) {
+                clearInterval(interval)
+                resolve()
+            }
+        }, 1000)
+    })
+}
+
+function workTimer() {
+    return timer(10)
+    // return timer(1500)
+}
+
+function breakTimer() {
+    return timer(5)
+    // return timer(300)
+}
+
+async function timerSequence(repetitions) {
+    for (let i = 0; i < repetitions; i++) {
+        await workTimer()
+        await breakTimer()
+    }
+}
+
+function countdown(duration) {
+    return new Promise((resolve) => {
+        let startTime = Date.now()
+        const interval = setInterval(() => {
+            if (isBreak) {
+                return null
+            }
+            const elapsedTime = Date.now() - startTime - breakTime
+            const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
+            const hours = Math.floor(remainingTime / 3600)
+            const minutes = Math.floor((remainingTime % 3600) / 60)
+            const seconds = remainingTime % 60
+            const formattedHours = hours < 10 ? '0' + hours : hours
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes
+            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds
+            countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
+            if (remainingTime === 0) {
+                clearInterval(interval)
+                resolve()
+            }
+        }, 1000)
+    })
+}
+
+breakButton.addEventListener("click", () => {
+    isBreak = true
+    timeBeforeBreak = Date.now() - startTime
+    breakButton.style.display = "none"
+    resumeButton.style.display = "block"
+})
+
+resumeButton.addEventListener("click", () => {
+    isBreak = false
+    breakTime += Date.now() - (startTime + timeBeforeBreak)
+    breakButton.style.display = "block"
+    resumeButton.style.display = "none"
+})
+
+startButton.addEventListener("click", () => {
+    if (selectedDurationElement.innerText === "02:00:00") {
+        selectedProgramElement.innerText = ``
+        selectedDurationElement.innerText = ``
+        startButton.style.display = "none"
+        breakButton.style.display = "block"
+        startTime = Date.now()
+        timerSequence(2)
+        countdown(30)
+        // timerSequence(4)
+        // countdown(7200)
+    } else if (selectedDurationElement.innerText === "04:00:00") {
+        selectedProgramElement.innerText = ``
+        selectedDurationElement.innerText = ``
+        startButton.style.display = "none"
+        breakButton.style.display = "block"
+        startTime = Date.now()
+        timerSequence(8)
+        countdown(14400)
+    } else if (selectedDurationElement.innerText === "08:00:00") {
+        selectedProgramElement.innerText = ``
+        selectedDurationElement.innerText = ``
+        startButton.style.display = "none"
+        breakButton.style.display = "block"
+        startTime = Date.now()
+        timerSequence(16)
+        countdown(28800)
+    } else {
+        return null
+    }
 })

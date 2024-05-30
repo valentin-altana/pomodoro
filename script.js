@@ -79,11 +79,13 @@ function timer(duration) {
 }
 
 function workTimer() {
+    breakTime = 0
     return timer(10)
     // return timer(1500)
 }
 
 function breakTimer() {
+    breakTime = 0
     return timer(5)
     // return timer(300)
 }
@@ -99,10 +101,7 @@ function countdown(duration) {
     return new Promise((resolve) => {
         let startTime = Date.now()
         const interval = setInterval(() => {
-            if (isBreak) {
-                return null
-            }
-            const elapsedTime = Date.now() - startTime - breakTime
+            const elapsedTime = Date.now() - startTime
             const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
             const hours = Math.floor(remainingTime / 3600)
             const minutes = Math.floor((remainingTime % 3600) / 60)

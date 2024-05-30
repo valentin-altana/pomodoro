@@ -51,18 +51,19 @@ buttonEightHourProgram.addEventListener("click", () => {
     buttonAdjustment("huit heures", 8)
 })
 
-let isBreak = false
-let breakTime = 0
-let timeBeforeBreak = 0
+let timerIsBreak = false
+let timerBreakTime = 0
+let timerTimeBeforeBreak = 0
+let timerStartTime = 0
 
 function timer(duration) {
     return new Promise((resolve) => {
         let startTime = Date.now()
         const interval = setInterval(() => {
-            if (isBreak) {
+            if (timerIsBreak) {
                 return null
             }
-            const elapsedTime = Date.now() - startTime - breakTime
+            const elapsedTime = Date.now() - startTime - timerBreakTime
             const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
             const minutes = Math.floor(remainingTime / 60)
             const seconds = remainingTime % 60
@@ -79,13 +80,15 @@ function timer(duration) {
 }
 
 function workTimer() {
-    breakTime = 0
+    timerBreakTime = 0
+    timerStartTime = Date.now()
     return timer(10)
     // return timer(1500)
 }
 
 function breakTimer() {
-    breakTime = 0
+    timerBreakTime = 0
+    timerStartTime = Date.now()
     return timer(5)
     // return timer(300)
 }
@@ -118,27 +121,12 @@ function countdown(duration) {
     })
 }
 
-breakButton.addEventListener("click", () => {
-    isBreak = true
-    timeBeforeBreak = Date.now() - startTime
-    breakButton.style.display = "none"
-    resumeButton.style.display = "block"
-})
-
-resumeButton.addEventListener("click", () => {
-    isBreak = false
-    breakTime += Date.now() - (startTime + timeBeforeBreak)
-    breakButton.style.display = "block"
-    resumeButton.style.display = "none"
-})
-
 startButton.addEventListener("click", () => {
     if (selectedDurationElement.innerText === "02:00:00") {
         selectedProgramElement.innerText = ``
         selectedDurationElement.innerText = ``
         startButton.style.display = "none"
         breakButton.style.display = "block"
-        startTime = Date.now()
         timerSequence(2)
         countdown(30)
         // timerSequence(4)
@@ -148,7 +136,6 @@ startButton.addEventListener("click", () => {
         selectedDurationElement.innerText = ``
         startButton.style.display = "none"
         breakButton.style.display = "block"
-        startTime = Date.now()
         timerSequence(8)
         countdown(14400)
     } else if (selectedDurationElement.innerText === "08:00:00") {
@@ -156,10 +143,25 @@ startButton.addEventListener("click", () => {
         selectedDurationElement.innerText = ``
         startButton.style.display = "none"
         breakButton.style.display = "block"
-        startTime = Date.now()
         timerSequence(16)
         countdown(28800)
     } else {
         return null
     }
+})
+
+breakButton.addEventListener("click", () => {
+    timerIsBreak = true
+    timerTimeBeforeBreak = Date.now() - timerStartTime
+    timerStartTime = Date.now()
+    breakButton.style.display = "none"
+    resumeButton.style.display = "block"
+})
+
+resumeButton.addEventListener("click", () => {
+    timerIsBreak = false
+    timerBreakTime += Date.now() - (timerStartTime + timerTimeBeforeBreak)
+    timerStartTime = Date.now()
+    breakButton.style.display = "block"
+    resumeButton.style.display = "none"
 })

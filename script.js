@@ -81,14 +81,12 @@ function timer(duration) {
 
 function workTimer() {
     timerBreakTime = 0
-    timerStartTime = Date.now()
     return timer(10)
     // return timer(1500)
 }
 
 function breakTimer() {
     timerBreakTime = 0
-    timerStartTime = Date.now()
     return timer(5)
     // return timer(300)
 }
@@ -153,7 +151,6 @@ startButton.addEventListener("click", () => {
 breakButton.addEventListener("click", () => {
     timerIsBreak = true
     timerTimeBeforeBreak = Date.now() - timerStartTime
-    timerStartTime = Date.now()
     breakButton.style.display = "none"
     resumeButton.style.display = "block"
 })
@@ -161,7 +158,6 @@ breakButton.addEventListener("click", () => {
 resumeButton.addEventListener("click", () => {
     timerIsBreak = false
     timerBreakTime += Date.now() - (timerStartTime + timerTimeBeforeBreak)
-    timerStartTime = Date.now()
     breakButton.style.display = "block"
     resumeButton.style.display = "none"
 })

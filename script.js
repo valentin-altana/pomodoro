@@ -51,11 +51,25 @@ buttonEightHourProgram.addEventListener("click", () => {
     buttonAdjustment("huit heures", 8)
 })
 
+let timerIsBreak = false
+let timerBreakTime = 0
+let timerTimeBeforeBreak = 0
+let timerStartTime = 0
+
+let countdownIsBreak = false
+let countdownBreakTime = 0
+let countdownTimeBeforeBreak = 0
+let countdownStartTime = 0
+
 function timer(duration) {
     return new Promise((resolve) => {
-        const startTime = Date.now()
+        let startTime = Date.now()
+        timerStartTime = startTime
         const interval = setInterval(() => {
-            const elapsedTime = Date.now() - startTime
+            if (timerIsBreak) {
+                return null
+            }
+            const elapsedTime = Date.now() - startTime - timerBreakTime
             const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
             const minutes = Math.floor(remainingTime / 60)
             const seconds = remainingTime % 60
@@ -72,11 +86,13 @@ function timer(duration) {
 }
 
 function workTimer() {
+    timerBreakTime = 0
     return timer(10)
     // return timer(1500)
 }
 
 function breakTimer() {
+    timerBreakTime = 0
     return timer(5)
     // return timer(300)
 }
@@ -89,9 +105,13 @@ async function timerSequence(repetitions) {
 }
 
 function countdown(duration) {
-    const startTime = Date.now()
+    let startTime = Date.now()
+    countdownStartTime = startTime
     const interval = setInterval(() => {
-        const elapsedTime = Date.now() - startTime
+        if (countdownIsBreak) {
+            return null
+        }
+        const elapsedTime = Date.now() - startTime - countdownBreakTime
         const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
         const hours = Math.floor(remainingTime / 3600)
         const minutes = Math.floor((remainingTime % 3600) / 60)
@@ -136,9 +156,19 @@ startButton.addEventListener("click", () => {
 })
 
 breakButton.addEventListener("click", () => {
-    // Code lié à la pause supprimé
+    timerIsBreak = true
+    countdownIsBreak = true
+    timerTimeBeforeBreak = Date.now() - timerStartTime
+    countdownTimeBeforeBreak = Date.now() - countdownStartTime
+    breakButton.style.display = "none"
+    resumeButton.style.display = "block"
 })
 
 resumeButton.addEventListener("click", () => {
-    // Code lié à la reprise supprimé
+    timerIsBreak = false
+    countdownIsBreak = false
+    timerBreakTime += Date.now() - (timerStartTime + timerTimeBeforeBreak)
+    countdownBreakTime += Date.now() - (countdownStartTime + countdownTimeBeforeBreak)
+    breakButton.style.display = "block"
+    resumeButton.style.display = "none"
 })

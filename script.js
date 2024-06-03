@@ -105,28 +105,25 @@ async function timerSequence(repetitions) {
 }
 
 function countdown(duration) {
-    return new Promise((resolve) => {
-        let startTime = Date.now()
-        countdownStartTime = startTime
-        const interval = setInterval(() => {
-            if (countdownIsBreak) {
-                return null
-            }
-            const elapsedTime = Date.now() - startTime - countdownBreakTime
-            const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
-            const hours = Math.floor(remainingTime / 3600)
-            const minutes = Math.floor((remainingTime % 3600) / 60)
-            const seconds = remainingTime % 60
-            const formattedHours = hours < 10 ? '0' + hours : hours
-            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes
-            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds
-            countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
-            if (remainingTime === 0) {
-                clearInterval(interval)
-                resolve()
-            }
-        }, 1000)
-    })
+    let startTime = Date.now()
+    countdownStartTime = startTime
+    const interval = setInterval(() => {
+        if (countdownIsBreak) {
+            return null
+        }
+        const elapsedTime = Date.now() - startTime - countdownBreakTime
+        const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
+        const hours = Math.floor(remainingTime / 3600)
+        const minutes = Math.floor((remainingTime % 3600) / 60)
+        const seconds = remainingTime % 60
+        const formattedHours = hours < 10 ? '0' + hours : hours
+        const formattedMinutes = minutes < 10 ? '0' + minutes : minutes
+        const formattedSeconds = seconds < 10 ? '0' + seconds : seconds
+        countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
+        if (remainingTime === 0) {
+            clearInterval(interval)
+        }
+    }, 1000)
 }
 
 startButton.addEventListener("click", () => {

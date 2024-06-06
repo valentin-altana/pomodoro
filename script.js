@@ -81,6 +81,9 @@ function timer(duration) {
             timerElement.innerText = `${formattedMinutes}:${formattedSeconds}`
             if (remainingTime === 0) {
                 clearInterval(interval)
+                document.title = `Wallacefocus • C'est terminé !`
+                timerElement.innerText = ``
+                endingMessageElement.innerText = `Tu as terminé\nta session !\nPour revenir à\nl'écran titre,\nappuie sur RETOUR.`
                 resolve()
             }
         }, 1000)
@@ -122,10 +125,7 @@ function countdown(duration) {
         countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
         if (remainingTime === 0) {
             clearInterval(interval)
-            document.title = `Wallacefocus • C'est terminé !`
-            timerElement.innerText = ``
             countdownElement.innerText = ``
-            endingMessageElement.innerText = `Tu as terminé\nta session !\nPour revenir à\nl'écran titre,\nappuie sur RETOUR.`
             breakButton.style.display = "none"
             backButton.style.display = "block"
         }

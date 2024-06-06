@@ -5,6 +5,14 @@
     font-family: "Comfortaa";
 }
 
+.selected-program,
+.ending-message,
+.timer,
+.selected-duration,
+.countdown {
+    font-family: "Reddit Mono";
+}
+
 body {
     flex-direction: column;
     display: flex;
@@ -100,7 +108,7 @@ h1 {
     height: 35px;
     width: 86.25px;
 
-    font-size: 15px;
+    font-size: 14.25px;
 }
 
 button {
@@ -168,7 +176,8 @@ button:active {
     box-shadow: inset 0 0 50px 0 rgba(0, 0, 0, 0.5);
 }
 
-.selected-program {
+.selected-program,
+.ending-message {
     align-items: center;
     justify-content: space-around;
     display: flex;
@@ -191,7 +200,7 @@ button:active {
     display: flex;
     position: absolute;
 
-    font-size: 100px;
+    font-size: 87.5px;
     text-align: center;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -318,7 +327,8 @@ button:active {
 
 .start-button,
 .break-button,
-.resume-button {
+.resume-button,
+.back-button {
     height: 50px;
     width: 172.5px;
 
@@ -334,6 +344,10 @@ button:active {
 }
 
 .resume-button {
+    display: none;
+}
+
+.back-button {
     display: none;
 }
 
@@ -486,6 +500,10 @@ h2 {
     border-bottom: solid #dfbfbf 1px;
 }
 
+h3 {
+    font-size: 25px;
+}
+
 .contact-text-area {
     height: 126.5px;
     width: 100%;
@@ -495,7 +513,7 @@ h2 {
     position: relative;
     border-bottom: solid #dfbfbf 1px;
 
-    font-size: 13.25px;
+    font-size: 14.25px;
     line-height: 1.5;
 }
 

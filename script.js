@@ -4,8 +4,10 @@ const buttonEightHourProgram = document.getElementById("8-hour-program")
 const startButton = document.querySelector(".start-button")
 const breakButton = document.querySelector(".break-button")
 const resumeButton = document.querySelector(".resume-button")
+const backButton = document.querySelector(".back-button")
 
 const selectedProgramElement = document.querySelector(".selected-program")
+const endingMessageElement = document.querySelector(".ending-message")
 const timerElement = document.querySelector(".timer")
 const selectedDurationElement = document.querySelector(".selected-duration")
 const countdownElement = document.querySelector(".countdown")
@@ -15,10 +17,10 @@ const regex = /[a-z]/
 
 let selectedProgram = null
 
-selectedProgramElement.innerText = `Bonjour,\nbienvenue sur Wallacefocus.\nPour commencer, sélectionne un programme.`
+selectedProgramElement.innerText = `Bienvenue sur Wallacefocus !\nPour commencer, sélectionne un programme.`
 
 function resetProgram() {
-    selectedProgramElement.innerText = `Bonjour,\nbienvenue sur Wallacefocus.\nPour commencer, sélectionne un programme.`
+    selectedProgramElement.innerText = `Bienvenue sur Wallacefocus !\nPour commencer, sélectionne un programme.`
     selectedDurationElement.innerText = ``
     selectedProgram = null
 }
@@ -87,14 +89,12 @@ function timer(duration) {
 
 function workTimer() {
     timerBreakTime = 0
-    return timer(10)
-    // return timer(1500)
+    return timer(1500)
 }
 
 function breakTimer() {
     timerBreakTime = 0
-    return timer(5)
-    // return timer(300)
+    return timer(300)
 }
 
 async function timerSequence(repetitions) {
@@ -122,21 +122,27 @@ function countdown(duration) {
         countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
         if (remainingTime === 0) {
             clearInterval(interval)
+            document.title = `Wallacefocus • C'est terminé !`
+            timerElement.innerText = ``
+            countdownElement.innerText = ``
+            endingMessageElement.innerText = `Tu as terminé\nta session !\nPour revenir à\nl'écran titre,\nappuie sur RETOUR.`
+            breakButton.style.display = "none"
+            backButton.style.display = "block"
         }
     }, 1000)
 }
 
 startButton.addEventListener("click", () => {
     if (selectedDurationElement.innerText === "02:00:00") {
+        selectedProgram = null
         selectedProgramElement.innerText = ``
         selectedDurationElement.innerText = ``
         startButton.style.display = "none"
         breakButton.style.display = "block"
-        timerSequence(2)
-        countdown(30)
-        // timerSequence(4)
-        // countdown(7200)
+        timerSequence(4)
+        countdown(7200)
     } else if (selectedDurationElement.innerText === "04:00:00") {
+        selectedProgram = null
         selectedProgramElement.innerText = ``
         selectedDurationElement.innerText = ``
         startButton.style.display = "none"
@@ -144,6 +150,7 @@ startButton.addEventListener("click", () => {
         timerSequence(8)
         countdown(14400)
     } else if (selectedDurationElement.innerText === "08:00:00") {
+        selectedProgram = null
         selectedProgramElement.innerText = ``
         selectedDurationElement.innerText = ``
         startButton.style.display = "none"
@@ -169,6 +176,14 @@ resumeButton.addEventListener("click", () => {
     countdownIsBreak = false
     timerBreakTime += performance.now() - (timerStartTime + timerTimeBeforeBreak)
     countdownBreakTime += performance.now() - (countdownStartTime + countdownTimeBeforeBreak)
-    breakButton.style.display = "block"
     resumeButton.style.display = "none"
+    breakButton.style.display = "block"
+})
+
+backButton.addEventListener("click", () => {
+    document.title = `Wallacefocus`
+    endingMessageElement.innerText = ``
+    selectedProgramElement.innerText = `Bienvenue sur Wallacefocus !\nPour commencer, sélectionne un programme.`
+    backButton.style.display = "none"
+    startButton.style.display = "block"
 })

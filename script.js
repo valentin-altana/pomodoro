@@ -63,13 +63,13 @@ let countdownStartTime = 0
 
 function timer(duration) {
     return new Promise((resolve) => {
-        let startTime = Date.now()
+        let startTime = performance.now()
         timerStartTime = startTime
         const interval = setInterval(() => {
             if (timerIsBreak) {
                 return null
             }
-            const elapsedTime = Date.now() - startTime - timerBreakTime
+            const elapsedTime = performance.now() - startTime - timerBreakTime
             const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
             const minutes = Math.floor(remainingTime / 60)
             const seconds = remainingTime % 60
@@ -105,13 +105,13 @@ async function timerSequence(repetitions) {
 }
 
 function countdown(duration) {
-    let startTime = Date.now()
+    let startTime = performance.now()
     countdownStartTime = startTime
     const interval = setInterval(() => {
         if (countdownIsBreak) {
             return null
         }
-        const elapsedTime = Date.now() - startTime - countdownBreakTime
+        const elapsedTime = performance.now() - startTime - countdownBreakTime
         const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
         const hours = Math.floor(remainingTime / 3600)
         const minutes = Math.floor((remainingTime % 3600) / 60)
@@ -158,8 +158,8 @@ startButton.addEventListener("click", () => {
 breakButton.addEventListener("click", () => {
     timerIsBreak = true
     countdownIsBreak = true
-    timerTimeBeforeBreak = Date.now() - timerStartTime
-    countdownTimeBeforeBreak = Date.now() - countdownStartTime
+    timerTimeBeforeBreak = performance.now() - timerStartTime
+    countdownTimeBeforeBreak = performance.now() - countdownStartTime
     breakButton.style.display = "none"
     resumeButton.style.display = "block"
 })
@@ -167,8 +167,8 @@ breakButton.addEventListener("click", () => {
 resumeButton.addEventListener("click", () => {
     timerIsBreak = false
     countdownIsBreak = false
-    timerBreakTime += Date.now() - (timerStartTime + timerTimeBeforeBreak)
-    countdownBreakTime += Date.now() - (countdownStartTime + countdownTimeBeforeBreak)
+    timerBreakTime += performance.now() - (timerStartTime + timerTimeBeforeBreak)
+    countdownBreakTime += performance.now() - (countdownStartTime + countdownTimeBeforeBreak)
     breakButton.style.display = "block"
     resumeButton.style.display = "none"
 })

@@ -182,7 +182,7 @@ startButton.addEventListener("click", () => {
     if (selectedDurationElement.innerText === "02:00:00") {
         timerValue = 1
         countdownValue = 4
-        progressBarValue = 4
+        progressBarValue = 8
     } else if (selectedDurationElement.innerText === "04:00:00") {
         timerValue = 8
         countdownValue = 14400
@@ -217,10 +217,14 @@ resumeButton.addEventListener("click", () => {
 })
 
 backButton.addEventListener("click", () => {
-    document.title = `Wallacefocus`
-    endingMessageElement.innerText = ``
-    selectedProgramElement.innerText = `Bienvenue sur Wallacefocus !\nPour commencer, sélectionne un programme.`
-    progressBarElement.style.width = "0%"
-    backButton.style.display = "none"
-    startButton.style.display = "block"
+    if (timerElement.innerText === `` && countdownElement.innerText === `` && progressBarElement.style.width === "100%") {
+        document.title = `Wallacefocus`
+        endingMessageElement.innerText = ``
+        selectedProgramElement.innerText = `Bienvenue sur Wallacefocus !\nPour commencer, sélectionne un programme.`
+        progressBarElement.style.width = "0%"
+        backButton.style.display = "none"
+        startButton.style.display = "block"
+    } else {
+        return null
+    }
 })

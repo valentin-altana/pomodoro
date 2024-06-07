@@ -63,6 +63,11 @@ let countdownBreakTime = 0
 let countdownTimeBeforeBreak = 0
 let countdownStartTime = 0
 
+let progressBarIsBreak = false
+let progressBarBreakTime = 0
+let progressBarTimeBeforeBreak = 0
+let progressBarStartTime = 0
+
 function timer(duration) {
     return new Promise((resolve) => {
         let startTime = performance.now()
@@ -90,13 +95,11 @@ function timer(duration) {
 function workTimer() {
     timerBreakTime = 0
     return timer(2)
-    // return timer(1500)
 }
 
 function breakTimer() {
     timerBreakTime = 0
     return timer(2)
-    // return timer(300)
 }
 
 async function timerSequence(repetitions) {
@@ -125,10 +128,9 @@ function countdown(duration) {
         const formattedMinutes = minutes < 10 ? "0" + minutes : minutes
         const formattedSeconds = seconds < 10 ? "0" + seconds : seconds
         countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
-        const progressBar = (elapsedTime / (duration * 1000)) * 100
-        progressBarElement.style.width = progressBar + "%"
         if (remainingTime === 0) {
             clearInterval(interval)
+            countdownBreakTime = 0
             countdownElement.innerText = ``
             breakButton.style.display = "none"
             backButton.style.display = "block"
@@ -136,52 +138,80 @@ function countdown(duration) {
     }, 1000)
 }
 
+function progressBar(duration) {
+    let startTime = performance.now()
+    progressBarStartTime = startTime
+    const interval = setInterval(() => {
+        if (progressBarIsBreak) {
+            return null
+        }
+        const elapsedTime = performance.now() - startTime - progressBarBreakTime
+        const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
+        const progressBarValue = (elapsedTime / (duration * 1000)) * 100
+        progressBarElement.style.width = progressBarValue + "%"
+        if (remainingTime === 0) {
+            clearInterval(interval)
+            progressBarBreakTime = 0
+            progressBarElement.style.width = "100%"
+        }
+    }, 1000)
+}
+
+function breakCounters() {
+    timerIsBreak = true
+    countdownIsBreak = true
+    progressBarIsBreak = true
+    timerTimeBeforeBreak = performance.now() - timerStartTime
+    countdownTimeBeforeBreak = performance.now() - countdownStartTime
+    progressBarTimeBeforeBreak = performance.now() - progressBarStartTime
+}
+
+function resumeCounters() {
+    timerIsBreak = false
+    countdownIsBreak = false
+    progressBarIsBreak = false
+    timerBreakTime += performance.now() - (timerStartTime + timerTimeBeforeBreak)
+    countdownBreakTime += performance.now() - (countdownStartTime + countdownTimeBeforeBreak)
+    progressBarBreakTime += performance.now() - (progressBarStartTime + progressBarTimeBeforeBreak)
+}
+
 startButton.addEventListener("click", () => {
+    let timerValue = 0
+    let countdownValue = 0
+    let progressBarValue = 0
     if (selectedDurationElement.innerText === "02:00:00") {
-        selectedProgram = null
-        selectedProgramElement.innerText = ``
-        selectedDurationElement.innerText = ``
-        startButton.style.display = "none"
-        breakButton.style.display = "block"
-        timerSequence(1)
-        countdown(4)
-        // timerSequence(4)
-        // countdown(7200)
+        timerValue = 1
+        countdownValue = 4
+        progressBarValue = 4
     } else if (selectedDurationElement.innerText === "04:00:00") {
-        selectedProgram = null
-        selectedProgramElement.innerText = ``
-        selectedDurationElement.innerText = ``
-        startButton.style.display = "none"
-        breakButton.style.display = "block"
-        timerSequence(8)
-        countdown(14400)
+        timerValue = 8
+        countdownValue = 14400
+        progressBarValue = 14400
     } else if (selectedDurationElement.innerText === "08:00:00") {
-        selectedProgram = null
-        selectedProgramElement.innerText = ``
-        selectedDurationElement.innerText = ``
-        startButton.style.display = "none"
-        breakButton.style.display = "block"
-        timerSequence(16)
-        countdown(28800)
+        timerValue = 16
+        countdownValue = 28800
+        progressBarValue = 28800
     } else {
         return null
     }
+    selectedProgram = null
+    selectedProgramElement.innerText = ``
+    selectedDurationElement.innerText = ``
+    startButton.style.display = "none"
+    breakButton.style.display = "block"
+    timerSequence(timerValue)
+    countdown(countdownValue)
+    progressBar(progressBarValue)
 })
 
 breakButton.addEventListener("click", () => {
-    timerIsBreak = true
-    countdownIsBreak = true
-    timerTimeBeforeBreak = performance.now() - timerStartTime
-    countdownTimeBeforeBreak = performance.now() - countdownStartTime
+    breakCounters()
     breakButton.style.display = "none"
     resumeButton.style.display = "block"
 })
 
 resumeButton.addEventListener("click", () => {
-    timerIsBreak = false
-    countdownIsBreak = false
-    timerBreakTime += performance.now() - (timerStartTime + timerTimeBeforeBreak)
-    countdownBreakTime += performance.now() - (countdownStartTime + countdownTimeBeforeBreak)
+    resumeCounters()
     resumeButton.style.display = "none"
     breakButton.style.display = "block"
 })

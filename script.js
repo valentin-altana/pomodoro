@@ -75,15 +75,12 @@ function timer(duration) {
             const remainingTime = Math.max(0, duration - Math.floor(elapsedTime / 1000))
             const minutes = Math.floor(remainingTime / 60)
             const seconds = remainingTime % 60
-            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes
-            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds
+            const formattedMinutes = minutes < 10 ? "0" + minutes : minutes
+            const formattedSeconds = seconds < 10 ? "0" + seconds : seconds
             document.title = `Wallacefocus • ${formattedMinutes}:${formattedSeconds}`
             timerElement.innerText = `${formattedMinutes}:${formattedSeconds}`
             if (remainingTime === 0) {
                 clearInterval(interval)
-                document.title = `Wallacefocus • C'est terminé !`
-                timerElement.innerText = ``
-                endingMessageElement.innerText = `Tu as terminé\nta session !\nPour revenir à\nl'écran titre,\nappuie sur RETOUR.`
                 resolve()
             }
         }, 1000)
@@ -92,12 +89,14 @@ function timer(duration) {
 
 function workTimer() {
     timerBreakTime = 0
-    return timer(1500)
+    return timer(2)
+    // return timer(1500)
 }
 
 function breakTimer() {
     timerBreakTime = 0
-    return timer(300)
+    return timer(2)
+    // return timer(300)
 }
 
 async function timerSequence(repetitions) {
@@ -105,6 +104,9 @@ async function timerSequence(repetitions) {
         await workTimer()
         await breakTimer()
     }
+    document.title = `Wallacefocus • C'est terminé !`
+    timerElement.innerText = ``
+    endingMessageElement.innerText = `Tu as terminé\nta session !\nPour revenir à\nl'écran titre,\nappuie sur RETOUR.`
 }
 
 function countdown(duration) {
@@ -119,10 +121,12 @@ function countdown(duration) {
         const hours = Math.floor(remainingTime / 3600)
         const minutes = Math.floor((remainingTime % 3600) / 60)
         const seconds = remainingTime % 60
-        const formattedHours = hours < 10 ? '0' + hours : hours
-        const formattedMinutes = minutes < 10 ? '0' + minutes : minutes
-        const formattedSeconds = seconds < 10 ? '0' + seconds : seconds
+        const formattedHours = hours < 10 ? "0" + hours : hours
+        const formattedMinutes = minutes < 10 ? "0" + minutes : minutes
+        const formattedSeconds = seconds < 10 ? "0" + seconds : seconds
         countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
+        const progressBar = (elapsedTime / (duration * 1000)) * 100
+        progressBarElement.style.width = progressBar + "%"
         if (remainingTime === 0) {
             clearInterval(interval)
             countdownElement.innerText = ``
@@ -139,8 +143,10 @@ startButton.addEventListener("click", () => {
         selectedDurationElement.innerText = ``
         startButton.style.display = "none"
         breakButton.style.display = "block"
-        timerSequence(4)
-        countdown(7200)
+        timerSequence(1)
+        countdown(4)
+        // timerSequence(4)
+        // countdown(7200)
     } else if (selectedDurationElement.innerText === "04:00:00") {
         selectedProgram = null
         selectedProgramElement.innerText = ``
@@ -184,6 +190,7 @@ backButton.addEventListener("click", () => {
     document.title = `Wallacefocus`
     endingMessageElement.innerText = ``
     selectedProgramElement.innerText = `Bienvenue sur Wallacefocus !\nPour commencer, sélectionne un programme.`
+    progressBarElement.style.width = "0%"
     backButton.style.display = "none"
     startButton.style.display = "block"
 })

@@ -72,8 +72,9 @@ function timer(duration) {
     return new Promise((resolve) => {
         let startTime = performance.now()
         timerStartTime = startTime
-        const interval = setInterval(() => {
+        function updateTimer() {
             if (timerIsBreak) {
+                requestAnimationFrame(updateTimer)
                 return null
             }
             const elapsedTime = performance.now() - startTime - timerBreakTime
@@ -85,21 +86,23 @@ function timer(duration) {
             document.title = `Wallacefocus • ${formattedMinutes}:${formattedSeconds}`
             timerElement.innerText = `${formattedMinutes}:${formattedSeconds}`
             if (remainingTime === 0) {
-                clearInterval(interval)
                 resolve()
+            } else {
+                requestAnimationFrame(updateTimer)
             }
-        }, 1000)
+        }
+        requestAnimationFrame(updateTimer)
     })
 }
 
 function workTimer() {
     timerBreakTime = 0
-    return timer(2)
+    return timer(1500)
 }
 
 function breakTimer() {
     timerBreakTime = 0
-    return timer(2)
+    return timer(300)
 }
 
 async function timerSequence(repetitions) {
@@ -115,8 +118,9 @@ async function timerSequence(repetitions) {
 function countdown(duration) {
     let startTime = performance.now()
     countdownStartTime = startTime
-    const interval = setInterval(() => {
+    function updateCountdown() {
         if (countdownIsBreak) {
+            requestAnimationFrame(updateCountdown)
             return null
         }
         const elapsedTime = performance.now() - startTime - countdownBreakTime
@@ -129,20 +133,23 @@ function countdown(duration) {
         const formattedSeconds = seconds < 10 ? "0" + seconds : seconds
         countdownElement.innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
         if (remainingTime === 0) {
-            clearInterval(interval)
             countdownBreakTime = 0
             countdownElement.innerText = ``
             breakButton.style.display = "none"
             backButton.style.display = "block"
+        } else {
+            requestAnimationFrame(updateCountdown)
         }
-    }, 1000)
+    }
+    requestAnimationFrame(updateCountdown)
 }
 
 function progressBar(duration) {
     let startTime = performance.now()
     progressBarStartTime = startTime
-    const interval = setInterval(() => {
+    function updateProgressBar() {
         if (progressBarIsBreak) {
+            requestAnimationFrame(updateProgressBar)
             return null
         }
         const elapsedTime = performance.now() - startTime - progressBarBreakTime
@@ -150,11 +157,13 @@ function progressBar(duration) {
         const progressBarValue = (elapsedTime / (duration * 1000)) * 100
         progressBarElement.style.width = progressBarValue + "%"
         if (remainingTime === 0) {
-            clearInterval(interval)
             progressBarBreakTime = 0
             progressBarElement.style.width = "100%"
+        } else {
+            requestAnimationFrame(updateProgressBar)
         }
-    }, 1000)
+    }
+    requestAnimationFrame(updateProgressBar)
 }
 
 function breakCounters() {
@@ -180,9 +189,9 @@ startButton.addEventListener("click", () => {
     let countdownValue = 0
     let progressBarValue = 0
     if (selectedDurationElement.innerText === "02:00:00") {
-        timerValue = 1
-        countdownValue = 4
-        progressBarValue = 8
+        timerValue = 4
+        countdownValue = 7200
+        progressBarValue = 7200
     } else if (selectedDurationElement.innerText === "04:00:00") {
         timerValue = 8
         countdownValue = 14400
